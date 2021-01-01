@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Teste
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -36,7 +38,7 @@ Route::post('/profile/update/update', [
 
 Route::get('termos-condicoes', function () {
     return view('construcao');
-}); dawd
+});
 
 Route::get('politicas-privacidade', function () {
     return view('construcao');
