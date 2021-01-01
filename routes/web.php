@@ -32,11 +32,11 @@ Route::group(['middleware' => 'auth'], function(){
 Route::post('/profile/update/update', [
     'uses' => 'ProfilesController@update', 
     'as'  => 'profile.update'
-]);     
+]);    
 
 Route::get('termos-condicoes', function () {
     return view('construcao');
-}); 
+}); dawd
 
 Route::get('politicas-privacidade', function () {
     return view('construcao');
