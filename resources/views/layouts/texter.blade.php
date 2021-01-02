@@ -13,6 +13,21 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
 
+    <script>
+    
+    
+    @if(Session::has('success'))
+    
+        new Noty({
+        type: 'success',
+        layout: 'topRight',
+        text: 'Some notification text'
+    }).show();
+
+
+    @endif
+    
+    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
