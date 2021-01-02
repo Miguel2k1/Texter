@@ -40,9 +40,10 @@ class ProfilesController extends Controller
             ]);
         }
 
-        Session::flash('success', 'Profile Updated');
+        Session::flash('success', 'Perfil Atualizado com Sucesso!');
         return redirect()->back();
     }
 
+    
     
 }

@@ -105,21 +105,60 @@
 </div>   
 </div>
 
-    
+<audio id="myAudio">
+
+<source src="{{ asset('sounds/success.mp3') }}" type="audio/mpeg">
+
+</audio>
+
+
 <script type="application/javascript">
 
+    var myAudio = document.getElementById("myAudio");    
+
     window.onload = function(){ 
+
         document.getElementById('get_avatar').onclick = function() {
         document.getElementById('my_avatar').click();
         };
 
         document.getElementById('get_banner').onclick = function() {
         document.getElementById('my_banner').click();
-    };
+        };
+
+
+        @if(Session::has('success'))
+
+            myAudio.play();
+
+            new Noty({
+                type: 'success',
+                theme: 'mint',
+                layout: 'bottomRight',
+                text: '{{ Session::get('success') }}',
+                progressBar: false,            
+                timeout: 1500,
+
+                callbacks: {
+                    onClose: function() 
+                    {
+                        myAudio.pause();
+                        myAudio.currentTime = 0;
+
+                    },
+                }
+            }).show();
+            
+            
+            
+
+        @endif
+
 
 };
 
 </script>
+
 
 
 @stop
