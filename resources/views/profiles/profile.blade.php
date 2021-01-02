@@ -4,10 +4,10 @@
 
     <div class="container" style="margin-left: 0%;">
         <div class="col-lg-4">    
-            <div class="card" style="width: 450px">
+            <div class="card" style="width: 450px; border-radius: 10px;">
 
             <div class="card-header" style="height: 115px;">
-                <img src="{{$user->profile->banner}}" style="position: absolute; height: 115px; width: 448px; margin-top: -12px; margin-left: -20px;" data-toggle="modal" data-target="#BannerModalCenter">
+                <img src="{{Storage::url($user->profile->banner)}}" style="border-top-right-radius: 10px; border-top-left-radius: 10px; cursor: pointer; position: absolute; height: 115px; width: 448px; margin-top: -12px; margin-left: -20px;" data-toggle="modal" data-target="#BannerModalCenter">
                 <div class="dropdown" style="float: right;">
                    <!-- <button class="menu-btn material-icons" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">more_vert</button> -->
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -54,13 +54,14 @@
                 {{csrf_field()}}
                     <div class="form-group">
                         <div style="display: inline-block;">
-                            <img src="{{$user->profile->banner}}" style="position: absolute; height: 115px; width: 498px; margin-top: -16px; margin-left: -16px;">
-                            <span class="material-icons" style=""> camera_alt </span>
-                            
-                            <input type="file" id="imgupload" style="display: none;">
-                            <img src="{{ Storage::url($user->profile_avatar) }}" id="OpenImgUpload" width="112px" height="112px" style="border-radius: 50%; display: inline-block; position: relative; margin-top: 40px;" alt="">
-                            <span class="material-icons" style="position: absolute; margin-left: -67px; margin-top: 85px; cursor: pointer;"> camera_alt </span>
-                            
+                            <img src="{{Storage::url($user->profile->banner)}}" id="banner" style="position: absolute; height: 115px; width: 498px; margin-top: -16px; margin-left: -16px;">                            
+                            <span class="material-icons" style="position: absolute; margin: 44%; margin-top: 35px; cursor: pointer; background-color: #bdbdbd82; border-radius: 10px;" id="get_banner">camera_alt</span>   
+                            <input type="file" name="banner" accept="image/*" id="my_banner" style="display: none" onchange="document.getElementById('banner').src = window.URL.createObjectURL(this.files[0])">                  
+
+                                                        
+                            <img src="{{ Storage::url($user->profile_avatar) }}" id="avatar" width="112px" height="112px" style="border-radius: 50%; display: inline-block; position: relative; margin-top: 40px;" alt="">
+                            <span class="material-icons" style="position: absolute; margin-left: -71px; margin-top: 85px; cursor: pointer; background-color: #80808085; border-radius: 10px;" id="get_avatar"> camera_alt </span>
+                            <input type="file" name="profile_avatar" accept="image/*" id="my_avatar" onchange="document.getElementById('avatar').src = window.URL.createObjectURL(this.files[0])">                            
                         </div>
             </div>
                     <div class="form-group" style="margin-top: 10%; border-bottom: 1px solid rgb(217, 217, 217);">
@@ -97,13 +98,28 @@
 <div class="modal fade" id="BannerModalCenter" tabindex="-1" role="dialog" aria-labelledby="BannerModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document" style="margin: 1.75rem; max-width: 100%;">
     <div style="margin: 0 auto;">
-        <img src="{{ $user->profile->banner }}" width="1360px" height="400px" style="display: inline-block" alt="" class="unselectable">
+        <img src="{{ Storage::url($user->profile->banner) }}" width="1360px" height="400px" style="display: inline-block" alt="" class="unselectable">
       </div>
     </div>
   </div>
 </div>   
 </div>
+
     
+<script type="application/javascript">
+
+    window.onload = function(){ 
+        document.getElementById('get_avatar').onclick = function() {
+        document.getElementById('my_avatar').click();
+        };
+
+        document.getElementById('get_banner').onclick = function() {
+        document.getElementById('my_banner').click();
+    };
+
+};
+
+</script>
 
 
 @stop
